@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { NOT_FOUND } from "../api";
 import type { AgentAnswerElement } from "./types";
 
 interface AnswerBlockProps {
@@ -39,8 +40,14 @@ export function AnswerBlock({ element, onRetry }: AnswerBlockProps) {
             )}
             {state.status === "done" && (
                 <>
-                    {!state.result.grounded && <p className="warning">Not backed by your documents — double-check before relying on it.</p>}
-                    <p className="text">{withCitations(state.result.answer, id)}</p>
+                    {state.result.answer === NOT_FOUND ? (
+                        <p className="muted">{NOT_FOUND} Try other words, or add the answer to the handbook.</p>
+                    ) : (
+                        <>
+                            {!state.result.grounded && <p className="warning">Not backed by your documents. Double-check before relying on it.</p>}
+                            <p className="text">{withCitations(state.result.answer, id)}</p>
+                        </>
+                    )}
                     {state.result.citations.length > 0 && (
                         <ol className="sources">
                             {state.result.citations.map((c) => (

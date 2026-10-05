@@ -11,6 +11,9 @@ export interface AgentAnswer {
     readonly grounded: boolean;
 }
 
+/** What the agent says when nothing in the knowledge base matches. */
+export const NOT_FOUND = "I couldn't find this in your knowledge base.";
+
 export interface AgentApi {
     ask(question: string, signal?: AbortSignal): Promise<AgentAnswer>;
 }
