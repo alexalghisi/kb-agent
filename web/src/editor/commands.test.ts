@@ -36,6 +36,24 @@ describe("shortcuts", () => {
     });
 });
 
+describe("line breaks", () => {
+    it("continue with a paragraph after a heading", () => {
+        const editor = editorWith([{ type: "heading-two", children: [{ text: "Questions" }] }]);
+        editor.insertBreak();
+        expect(editor.children[1]).toEqual(p(""));
+    });
+
+    it("split a heading in the middle without changing either half", () => {
+        const editor = editorWith([{ type: "heading-two", children: [{ text: "AB" }] }]);
+        Transforms.select(editor, { path: [0, 0], offset: 1 });
+        editor.insertBreak();
+        expect(editor.children).toEqual([
+            { type: "heading-two", children: [{ text: "A" }] },
+            { type: "heading-two", children: [{ text: "B" }] },
+        ]);
+    });
+});
+
 describe("runAskCommand", () => {
     it("replaces the command with a pending answer, then fills it in", async () => {
         let resolve!: (value: typeof answer) => void;

@@ -6,8 +6,17 @@ const SHORTCUTS: Record<string, CustomElement["type"]> = { "#": "heading-one", "
 
 /** Markdown-style shortcuts: typing "# ", "## " or "> " at the start of a paragraph turns it into that block. */
 export function withShortcuts(editor: Editor): Editor {
-    const { insertText, isVoid } = editor;
+    const { insertText, insertBreak, isVoid } = editor;
     editor.isVoid = (element) => element.type === "agent-answer" || isVoid(element);
+    // Pressing Enter at the end of a heading or callout continues with a normal paragraph, like any editor.
+    editor.insertBreak = () => {
+        const block = Editor.above<CustomElement>(editor, { match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) });
+        insertBreak();
+        if (block && block[0].type !== "paragraph" && editor.selection) {
+            const current = Editor.above<CustomElement>(editor, { match: (n) => Element.isElement(n) && Editor.isBlock(editor, n) });
+            if (current && Editor.isEmpty(editor, current[0])) Transforms.setNodes(editor, { type: "paragraph" }, { at: current[1] });
+        }
+    };
     editor.insertText = (text) => {
         const { selection } = editor;
         if (text === " " && selection && selection.anchor.offset === selection.focus.offset) {
