@@ -1,0 +1,28 @@
+:root {
+    --text: #1f2328;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #3d5afe;
+    --soft: #f5f7ff;
+    font: 16px/1.6 Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--text);
+    background: #fafafa;
+}
+body { margin: 0; }
+.page { max-width: 760px; margin: 40px auto; padding: 32px 40px; background: #fff; border: 1px solid var(--border); border-radius: 12px; min-height: 70vh; }
+.editable { outline: none; }
+.editable h1 { font-size: 28px; margin: 0 0 12px; }
+.editable h2 { font-size: 20px; margin: 20px 0 8px; }
+.callout { border-left: 3px solid var(--accent); background: var(--soft); padding: 8px 14px; border-radius: 6px; margin: 12px 0; }
+.answer { margin: 14px 0; padding: 14px 16px; border: 1px solid var(--border); border-radius: 10px; background: #fcfcfd; }
+.answer .question { font-weight: 600; margin-bottom: 6px; }
+.badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: #fff; background: var(--accent); border-radius: 4px; padding: 1px 6px; vertical-align: 2px; }
+.answer .text { margin: 6px 0; }
+.cite { display: inline-block; min-width: 18px; padding: 0 5px; margin: 0 2px; font-size: 12px; line-height: 18px; text-align: center; color: var(--accent); background: var(--soft); border-radius: 9px; text-decoration: none; vertical-align: 1px; }
+.sources { margin: 8px 0 0; padding-left: 22px; font-size: 13px; color: var(--muted); }
+.sources a { color: var(--muted); }
+.muted { color: var(--muted); }
+.warning { color: #92400e; background: #fffbeb; border-radius: 6px; padding: 4px 8px; font-size: 14px; }
+.error { color: #b91c1c; }
+.answer-pending { animation: pulse 1.4s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.6; } }
