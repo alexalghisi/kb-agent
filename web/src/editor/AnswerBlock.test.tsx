@@ -24,8 +24,14 @@ describe("AnswerBlock", () => {
     });
 
     it("warns when the answer isn't grounded", () => {
-        render(<AnswerBlock element={block({ status: "done", result: { answer: "I couldn't find this in your knowledge base.", citations: [], grounded: false } })} />);
+        render(<AnswerBlock element={block({ status: "done", result: { answer: "Use WireGuard, trust me.", citations: [], grounded: false } })} />);
         expect(screen.getByText(/Not backed by your documents/)).toBeInTheDocument();
+    });
+
+    it("suggests what to do when nothing was found", () => {
+        render(<AnswerBlock element={block({ status: "done", result: { answer: "I couldn't find this in your knowledge base.", citations: [], grounded: false } })} />);
+        expect(screen.getByText(/Try other words, or add the answer to the handbook/)).toBeInTheDocument();
+        expect(screen.queryByText(/Not backed/)).toBeNull();
     });
 
     it("shows progress and lets you retry failures", async () => {
