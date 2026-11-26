@@ -2,6 +2,8 @@
 
 A knowledge base you can ask questions while you write. Connectors keep an index of your team's documents and tickets up to date. A LangGraph agent answers questions only from that index and cites its sources, and a Slate editor turns `/ask …` into an answer block with citation chips.
 
+**Download:** [latest release](https://github.com/alexalghisi/kb-agent/releases/latest)
+
 ![Typing /ask in the editor: answers with sources, and an honest "not found"](docs/preview.gif)
 
 ## Pieces
